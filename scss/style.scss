@@ -1,0 +1,46 @@
+.scrollSlider {
+    
+    div.viewport {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+
+        div.overview {
+            width: 10000px;
+            height: 100%;
+
+            img {
+                display: block;
+                float: left;
+                height: 100%;
+                margin-right: 5px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                width: 100%;
+                clear: both;
+            }
+        }
+    }
+    
+    div.scrollbar {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 100%;
+        height: 15px;
+        background-color: #aaa;
+
+        div.track {
+            width: 115px;
+            height: 15px;
+            background-color: #222;
+            cursor: move;
+        }
+    }
+}

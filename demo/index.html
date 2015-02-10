@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo of Scroll Slider</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div style="text-align: center;">
+		<h1>Demo of ScrollSlider</h1>
+	</div>
+	<div style="width:90%;margin: 50px auto;">
+		<div id="scrollslider" class="scrollSlider">
+			<div class="viewport">
+				<div class="overview">
+					<img src="http://placehold.it/1000x500">
+					<img src="http://placehold.it/1000x500">
+					<img src="http://placehold.it/1000x500">
+					<img src="http://placehold.it/1000x500">
+					<img src="http://placehold.it/1000x500">
+				</div>
+			</div>
+			<div class="scrollbar">
+				<div class="track"></div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery.scrollslider.js"></script>
+	<script>
+	$(function(){
+		$("#scrollslider").scrollSlider();
+	})
+	</script>
+</body>
+</html>

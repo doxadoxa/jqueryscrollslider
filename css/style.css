@@ -1,0 +1,32 @@
+.scrollSlider div.viewport {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; }
+  .scrollSlider div.viewport div.overview {
+    width: 10000px;
+    height: 100%; }
+    .scrollSlider div.viewport div.overview img {
+      display: block;
+      float: left;
+      height: 100%;
+      margin-right: 5px; }
+      .scrollSlider div.viewport div.overview img:last-child {
+        margin-right: 0; }
+    .scrollSlider div.viewport div.overview:after {
+      content: '';
+      display: block;
+      width: 100%;
+      clear: both; }
+.scrollSlider div.scrollbar {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 15px;
+  background-color: #aaa; }
+  .scrollSlider div.scrollbar div.track {
+    width: 115px;
+    height: 15px;
+    background-color: #222;
+    cursor: move; }
+
+/*# sourceMappingURL=style.css.map */
