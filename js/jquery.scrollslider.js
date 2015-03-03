@@ -22,12 +22,15 @@
         */
         $viewport.height( options.height );
 
-        $slider.find('.overview img:last').on('load', function() {
+        //slider.find('.overview img:last').on('load', 
+
+        $(window).load( function() {
             
             var contentWidth = 0;
+            var imagesMargin = [];
             
             $overview.find('img').each( function( i, e ) {
-                console.log(e);
+                imagesMargin.push( contentWidth );
                 contentWidth += $(e).outerWidth( true );
             });
 
@@ -118,7 +121,42 @@
             $(document).on("mouseup", function (e) {
                 $dragging = null;
             });
-                         
+
+            /**
+            Buttons event
+            **/
+
+            var $controlButtons = {};
+            $controlButtons['left'] = $("a[data-sslider-control=left]");
+            $controlButtons['right'] = $("a[data-sslider-control=right]");
+            
+            $controlButtons['left'].on('click', function() {
+                var ml = $overview.css('margin-left');
+
+                for ( var i = imagesMargin.length-1; i >=0; --i ) {
+                    if ( -imagesMargin[i] > ml ) {
+                        $overview.animate({'margin-left' : -imagesMargin[i]}, 'fast');
+                        break;
+                    }
+                }
+
+                return false;
+            });
+
+            $controlButtons['right'].on('click', function() {
+                var ml = $overview.css('margin-left');
+
+                for( var m in imagesMargin ) {
+                    console.log( -m );
+                    console.log( ml );
+                    if ( -m < ml ) {
+                        $overview.animate({'margin-left' : -m}, 'fast');
+                        break;
+                    }
+                }
+
+                return false;
+            });
         });
 
         return this;
