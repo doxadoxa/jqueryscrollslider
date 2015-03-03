@@ -31,6 +31,11 @@
                 contentWidth += $(e).outerWidth( true );
             });
 
+            if ( $viewport.width() > contentWidth ) {
+                $scrollbar.hide();
+                return;
+            }
+
             /**
             Offseting variables
             **/
