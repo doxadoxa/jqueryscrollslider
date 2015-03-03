@@ -1,12 +1,17 @@
 /* jQuery scrollslider plugin | */
 (function($) { 
     var defaults = {
-        height : 500
+        height : 500,
+        debug : false
     };
     var options;
 
     $.fn.scrollSlider = function( params ) {
         options = $.extend({}, defaults, options, params );
+
+        var log = function( message ) {
+            options['debug'] && console.log( message );
+        }
 
         /*
         Slider elements 
@@ -16,6 +21,9 @@
         var $overview = $slider.find('.overview');
         var $scrollbar = $slider.find('.scrollbar');
         var $track = $scrollbar.find('.track');
+
+        $track.css('position', 'relative');
+        $track.css('left', 0);
 
         /*
         Set default height
@@ -33,6 +41,12 @@
                 imagesMargin.push( contentWidth );
                 contentWidth += $(e).outerWidth( true );
             });
+
+            //Fix last imagesMargin
+            var lastImageMargin = imagesMargin.pop();
+
+            lastImageMargin -= ($viewport.width() - $overview.find('img:last').outerWidth());
+            imagesMargin.push( lastImageMargin );
 
             if ( $viewport.width() > contentWidth ) {
                 $scrollbar.hide();
@@ -131,11 +145,14 @@
             $controlButtons['right'] = $("a[data-sslider-control=right]");
             
             $controlButtons['left'].on('click', function() {
-                var ml = $overview.css('margin-left');
+                var ml = parseInt( $overview.css('margin-left') );
 
                 for ( var i = imagesMargin.length-1; i >=0; --i ) {
                     if ( -imagesMargin[i] > ml ) {
                         $overview.animate({'margin-left' : -imagesMargin[i]}, 'fast');
+                        $track.animate({
+                            'left': imagesMargin[i]*k
+                        }, 'fast');
                         break;
                     }
                 }
@@ -144,13 +161,16 @@
             });
 
             $controlButtons['right'].on('click', function() {
-                var ml = $overview.css('margin-left');
+                var ml = parseInt( $overview.css('margin-left') );
 
                 for( var m in imagesMargin ) {
-                    console.log( -m );
-                    console.log( ml );
-                    if ( -m < ml ) {
-                        $overview.animate({'margin-left' : -m}, 'fast');
+                    if ( -imagesMargin[m] < ml ) {
+                        $overview.animate({'margin-left' : -imagesMargin[m]}, 'fast');
+                        log( k );
+                        log( imagesMargin[m]*k );
+                        $track.animate({
+                            'left': Math.round( imagesMargin[m]*k )
+                        }, 'fast');
                         break;
                     }
                 }
