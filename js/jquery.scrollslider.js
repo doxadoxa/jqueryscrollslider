@@ -33,6 +33,10 @@
         //slider.find('.overview img:last').on('load', 
 
         $(window).load( function() {
+
+            var $controlButtons = {};
+            $controlButtons['left'] = $("a[data-sslider-control=left]");
+            $controlButtons['right'] = $("a[data-sslider-control=right]");
             
             var contentWidth = 0;
             var imagesMargin = [];
@@ -50,6 +54,8 @@
 
             if ( $viewport.width() > contentWidth ) {
                 $scrollbar.hide();
+                $controlButtons['left'].hide();
+                $controlButtons['right'].hide();
                 return;
             }
 
@@ -139,10 +145,6 @@
             /**
             Buttons event
             **/
-
-            var $controlButtons = {};
-            $controlButtons['left'] = $("a[data-sslider-control=left]");
-            $controlButtons['right'] = $("a[data-sslider-control=right]");
             
             $controlButtons['left'].on('click', function() {
                 var ml = parseInt( $overview.css('margin-left') );
