@@ -2,7 +2,8 @@
 (function($) { 
     var defaults = {
         height : 500,
-        debug : false
+        debug : false,
+        content : 'img'
     };
     var options;
 
@@ -41,7 +42,7 @@
             var contentWidth = 0;
             var imagesMargin = [];
             
-            $overview.find('img').each( function( i, e ) {
+            $overview.find( options.content ).each( function( i, e ) {
                 imagesMargin.push( contentWidth );
                 contentWidth += $(e).outerWidth( true );
             });
@@ -49,7 +50,7 @@
             //Fix last imagesMargin
             var lastImageMargin = imagesMargin.pop();
 
-            lastImageMargin -= ($viewport.width() - $overview.find('img:last').outerWidth());
+            lastImageMargin -= ($viewport.width() - $overview.find( options.content + ':last').outerWidth());
             imagesMargin.push( lastImageMargin );
 
             if ( $viewport.width() > contentWidth ) {
